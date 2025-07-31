@@ -27,6 +27,12 @@ def get_db():
     finally:
         db.close()
 
+
+@app.get("/")
+def root():
+    return {"status": "ok"}
+
+
 @app.post("/items/")
 def create_item(item: ItemCreate, db: Session = Depends(get_db)):
     return crud.create_item(db, item)

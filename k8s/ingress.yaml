@@ -1,16 +1,16 @@
-# k8s/ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: fastapi-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
+  ingressClassName: nginx
   rules:
-    - host: fastapi.local
-      http:
+    - http:
         paths:
-          - path: /
+          - path: /?(.*)
             pathType: Prefix
             backend:
               service:

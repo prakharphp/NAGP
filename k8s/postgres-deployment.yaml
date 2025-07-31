@@ -24,6 +24,15 @@ spec:
               value: myuser
             - name: POSTGRES_PASSWORD
               value: mypassword
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
           volumeMounts:
             - name: postgres-storage
               mountPath: /var/lib/postgresql/data
