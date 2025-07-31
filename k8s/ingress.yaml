@@ -2,18 +2,21 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: fastapi-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
-    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /?(.*)
+          - path: /
             pathType: Prefix
             backend:
               service:
                 name: fastapi-service
                 port:
                   number: 8000
+
+# kubectl get pods -n ingress-nginx
+# This Ingress resource routes HTTP traffic to the FastAPI service.
+# Note: Ensure that you have an Ingress controller installed in your Kubernetes cluster.
+# To deploy the NGINX Ingress Controller, you can use the following command:
+# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.9.4/deploy/static/provider/cloud/deploy.yaml
