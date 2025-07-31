@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: fastapi-service
 spec:
+  type: LoadBalancer  # Or NodePort for local development
   selector:
     app: fastapi-sqlite-app
   ports:
     - protocol: TCP
       port: 80
       targetPort: 8000
-  type: LoadBalancer  # Change to NodePort if running locally (e.g., Minikube)

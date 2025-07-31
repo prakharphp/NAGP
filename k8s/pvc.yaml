@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sqlite-pvc
+  name: postgres-pvc
 spec:
   accessModes:
     - ReadWriteOnce

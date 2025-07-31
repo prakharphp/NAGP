@@ -1,10 +1,20 @@
 # app/main.py
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from . import models, crud, database
 from .crud import ItemCreate
 
 app = FastAPI()
+
+# Allow all origins (for development only)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Or restrict to ["http://localhost:8000"]
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Create tables
 models.Base.metadata.create_all(bind=database.engine)
